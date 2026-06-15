@@ -10,7 +10,7 @@ dataloader = DataLoader(dataset, batch_size=32, shuffle=True) #shuffle=True veri
 model = SpektralModel()
 
 # Kayıp fonksiyonu ve optimizasyon algoritması
-criterion = nn.BCELoss() # Binary Cross Entropy Loss, ikili sınıflandırma için uygun bir kayıp fonksiyonu
+criterion = nn.BCEWithLogitsLoss() # Binary Cross Entropy Loss, ikili sınıflandırma için uygun bir kayıp fonksiyonu
 
 optimizer = optim.Adam(model.parameters(), lr=0.001) # Adam optimizasyon algoritması lr öğrenme oranı tamirci adımlarının büyüklüğü
 

@@ -2,7 +2,7 @@ import torch.nn as nn
 
 class SpektralModel(nn.Module):
     def __init__(self):
-        super (SpektralModel, self).__init__() # Miras alma kuralı ama anlamadım
+        super().__init__() # Miras alma kuralı bütün nn module özelliklerini alıp kendi layerlarımızı y
 
         # 1. Katman 18 girdi gizli 32 
         # Linear demek: Ağırlıklarla çarpıp bias ekle demek
@@ -23,6 +23,5 @@ class SpektralModel(nn.Module):
         x = self.relu(x) # Aktivasyon fonksiyonu Çizgiyi büktük Negatifleri sıfırladık
 
         x = self.layer2(x) # 2. katman 32 nöronu 1 çıktıya çarptık
-        x = self.sigmoid(x) # Aktivasyon fonksiyonu sonuçları 0-1 aralığına sıkıştırdık
 
         return x
