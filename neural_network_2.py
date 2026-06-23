@@ -1,20 +1,27 @@
 import random
+import math
 
-# Constants
 LEARNING_RATE = 0.001
 
-# 0 1 aralığından random başlangıç değerleri atıyoruz
-old_w_1 = random.uniform(-0.5, 0.5)
-old_w_2 = random.uniform(-0.5, 0.5)
-old_b_1 = random.uniform(-0.5, 0.5)
+# --- KAIMING (HE) INITIALIZATION ---
 
-old_w_3 = random.uniform(-0.5, 0.5)
-old_w_4 = random.uniform(-0.5, 0.5)
-old_b_2 = random.uniform(-0.5, 0.5)
+# 1. Katman (Gizli Nöronlar) için Standart Sapma: sqrt(2 / girdi_sayısı)
+std_hidden = math.sqrt(2.0 / 2) # n_in = 2 (x1 ve x2)
 
-old_w_5 = random.uniform(-0.5, 0.5)
-old_w_6 = random.uniform(-0.5, 0.5)
-old_b_3 = random.uniform(-0.5, 0.5)
+old_w_1 = random.gauss(0, std_hidden) # Çan eğrisi etrafında kontrollü rastgele
+old_w_2 = random.gauss(0, std_hidden)
+old_b_1 = 0.0  # Bias'lar KAOSA YOL AÇMAMAK İÇİN HER ZAMAN SIFIRLA BAŞLAR!
+
+old_w_3 = random.gauss(0, std_hidden)
+old_w_4 = random.gauss(0, std_hidden)
+old_b_2 = 0.0
+
+# 2. Katman (Çıktı Nöronu) için Standart Sapma
+std_output = math.sqrt(2.0 / 2) # n_in = 2 (h1 ve h2)
+
+old_w_5 = random.gauss(0, std_output)
+old_w_6 = random.gauss(0, std_output)
+old_b_3 = 0.0
 
 
 # Ai dan aldığım basit bir dataset
@@ -194,7 +201,7 @@ print("Tek bir data ile eğitilmiş modeli test ediyoruz")
 
 # Modelin daha önce görmediği iki input
 new_x_1 = 20
-new_x_2 = 1
+new_x_2 = 0
 
 # Test aşamasında sadece forward metodunu çağırıyoruz
 test_z_1, test_h_1, test_z_2, test_h_2, test_prediction, _, _ = forward(new_x_1, new_x_2)

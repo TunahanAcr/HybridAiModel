@@ -12,7 +12,7 @@ old_w_1 = 1 # Normalde random seçicez şimdilik sabit bıraktım
 
 
 
-def neuron_1(x) : 
+def linear(x) : 
 
     z_1 = old_w_1 * x + B_1
 
@@ -20,7 +20,7 @@ def neuron_1(x) :
 
 
 
-def neuron_2(z_1) :
+def relu(z_1) :
 
     h = z_1 if z_1 > 0 else 0
 
@@ -28,7 +28,7 @@ def neuron_2(z_1) :
     
 
 
-def neuron_3(h) :
+def output(h) :
     
     prediction = W_2 * h + B_2
 
@@ -37,9 +37,9 @@ def neuron_3(h) :
 
 def forward(x) : 
     
-    z_1 = neuron_1(x)
-    h = neuron_2(z_1)
-    prediction = neuron_3(h)
+    z_1 = linear(x)
+    h = relu(z_1)
+    prediction = output(h)
 
     return z_1, h, prediction, x
 
@@ -78,8 +78,10 @@ def backpropagation(x, z_1, prediction, old_w_1):
 
     total_loss = loss_function(prediction)
     gradient_slope = chain_rule(x, z_1, prediction)
+    step_size = LEARNING_RATE * gradient_slope
 
-    new_w_1 = old_w_1 - LEARNING_RATE * gradient_slope
+
+    new_w_1 = old_w_1 - step_size
 
     return total_loss, gradient_slope,old_w_1, new_w_1
 
